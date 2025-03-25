@@ -1,0 +1,59 @@
+
+[
+  {
+    "id": "daily-wood",
+    "type": "daily",
+    "title": "Лесоруб",
+    "description": "Соберите 20 единиц дерева",
+    "goal": {
+      "resource": "wood",
+      "amount": 20
+    },
+    "rewards": {
+      "stars": 1,
+      "coins": 5
+    }
+  },
+  {
+    "id": "daily-fish",
+    "type": "daily",
+    "title": "Рыболов",
+    "description": "Поймайте 15 рыб",
+    "goal": {
+      "resource": "fish",
+      "amount": 15
+    },
+    "rewards": {
+      "stars": 1,
+      "coins": 5
+    }
+  },
+  {
+    "id": "daily-expedition",
+    "type": "daily",
+    "title": "Исследователь",
+    "description": "Завершите ежедневную вылазку",
+    "goal": {
+      "action": "expedition",
+      "amount": 1
+    },
+    "rewards": {
+      "stars": 3,
+      "coins": 10
+    }
+  },
+  {
+    "id": "achievement-cats",
+    "type": "achievement",
+    "title": "Коллекционер",
+    "description": "Соберите 5 разных кошек",
+    "goal": {
+      "collection": "cats",
+      "amount": 5
+    },
+    "rewards": {
+      "stars": 5,
+      "coins": 20
+    }
+  }
+]

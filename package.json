@@ -1,0 +1,26 @@
+{
+  "name": "catwille",
+  "version": "1.0.0",
+  "description": "Кошачья Империя - игра для Telegram WebApp",
+  "main": "index.js",
+  "scripts": {
+    "heroku-postbuild": "cd client && npm install && npm run build && cd ../server && npm install",
+    "start": "node server/src/index.js",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [
+    "telegram",
+    "webapp",
+    "game",
+    "cats"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

@@ -1,0 +1,102 @@
+
+[
+  {
+    "id": "forest",
+    "name": "Лес",
+    "description": "Густой лес, полный дерева и тайн",
+    "imageUrl": "/assets/images/expeditions/forest.png",
+    "rewards": {
+      "guaranteed": {
+        "wood": {
+          "min": 5,
+          "max": 15
+        }
+      },
+      "chance": {
+        "catFood": {
+          "chance": 0.5,
+          "min": 1,
+          "max": 3
+        },
+        "coins": {
+          "chance": 0.3,
+          "min": 2,
+          "max": 5
+        }
+      }
+    },
+    "stories": [
+      {
+        "id": "forest-story-1",
+        "text": "Вы обнаружили котенка, запутавшегося в кустах. Помочь ему?",
+        "choices": [
+          {
+            "text": "Спасти котенка",
+            "outcomes": [
+              {
+                "chance": 0.7,
+                "text": "Вы освободили котенка, и он решил присоединиться к вашему поселению!",
+                "rewards": {
+                  "cats": ["forest-kitten"],
+                  "stars": 3
+                }
+              },
+              {
+                "chance": 0.3,
+                "text": "При попытке спасти котенка вы поранились, но все же смогли его освободить.",
+                "rewards": {
+                  "cats": ["forest-kitten"],
+                  "stars": 1
+                },
+                "penalties": {
+                  "energy": 5
+                }
+              }
+            ]
+          },
+          {
+            "text": "Пройти мимо",
+            "outcomes": [
+              {
+                "chance": 1.0,
+                "text": "Вы решили не рисковать и прошли мимо.",
+                "rewards": {
+                  "wood": 3
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "unlockLevel": 4
+  },
+  {
+    "id": "lake",
+    "name": "Озеро",
+    "description": "Большое озеро с обилием рыбы",
+    "imageUrl": "/assets/images/expeditions/lake.png",
+    "rewards": {
+      "guaranteed": {
+        "fish": {
+          "min": 5,
+          "max": 15
+        }
+      },
+      "chance": {
+        "catFood": {
+          "chance": 0.4,
+          "min": 1,
+          "max": 2
+        },
+        "coins": {
+          "chance": 0.2,
+          "min": 1,
+          "max": 3
+        }
+      }
+    },
+    "stories": [],
+    "unlockLevel": 4
+  }
+]

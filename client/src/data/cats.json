@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cat-001",
+    "name": "Старый Мурзик",
+    "rarity": "common",
+    "description": "Опытный строитель, который поможет восстановить дом",
+    "bonus": {
+      "type": "wood",
+      "value": 5
+    },
+    "imageUrl": "/assets/images/cats/old-murzik.png",
+    "unlockLevel": 1
+  },
+  {
+    "id": "cat-002",
+    "name": "Рыбачка Соня",
+    "rarity": "common",
+    "description": "Любит рыбалку и приносит больше рыбы",
+    "bonus": {
+      "type": "fish",
+      "value": 10
+    },
+    "imageUrl": "/assets/images/cats/fisher-sonya.png",
+    "unlockLevel": 2
+  },
+  {
+    "id": "cat-003",
+    "name": "Торговец Барсик",
+    "rarity": "uncommon",
+    "description": "Получает больше монет при продаже ресурсов",
+    "bonus": {
+      "type": "coins",
+      "value": 15
+    },
+    "imageUrl": "/assets/images/cats/trader-barsik.png",
+    "unlockLevel": 3
+  },
+  {
+    "id": "cat-004",
+    "name": "Запасливый Пушок",
+    "rarity": "uncommon",
+    "description": "Увеличивает максимальную вместимость хранилища",
+    "bonus": {
+      "type": "storage",
+      "value": 20
+    },
+    "imageUrl": "/assets/images/cats/storage-pushok.png",
+    "unlockLevel": 4
+  },
+  {
+    "id": "cat-005",
+    "name": "Исследователь Тим",
+    "rarity": "rare",
+    "description": "Находит больше редких ресурсов во время вылазок",
+    "bonus": {
+      "type": "expedition",
+      "value": 25
+    },
+    "imageUrl": "/assets/images/cats/explorer-tim.png",
+    "unlockLevel": 5
+  }
+]
