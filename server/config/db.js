@@ -6,13 +6,18 @@ const connectDB = async () => {
     let mongoURI = process.env.MONGODB_URI;
     
     if (!mongoURI && process.env.MONGODB_USERNAME && process.env.MONGODB_PASSWORD) {
-      mongoURI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.mongodb.net/catwille?retryWrites=true&w=majority`;
+      // Updated connection string with a fallback to potential custom cluster name
+      const cluster = process.env.MONGODB_CLUSTER || 'cluster0.kfqcyxl';
+      mongoURI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${cluster}.mongodb.net/catwille?retryWrites=true&w=majority`;
+      console.log('Using constructed MongoDB URI with auth credentials');
     }
     
     if (!mongoURI) {
       console.warn('MONGODB_URI не указан, использую локальную базу данных');
       mongoURI = 'mongodb://localhost:27017/catwille';
     }
+
+    console.log('Connecting to MongoDB with URI:', mongoURI.replace(/:[^:]*@/, ':****@')); // Log URI with hidden password
 
     const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
