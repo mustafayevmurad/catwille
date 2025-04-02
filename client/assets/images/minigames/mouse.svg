@@ -1,0 +1,21 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Mouse body (gray) -->
+    <ellipse cx="20" cy="22" rx="15" ry="12" fill="#A0A0A0"/>
+    
+    <!-- Mouse head -->
+    <ellipse cx="30" cy="20" rx="10" ry="8" fill="#A0A0A0"/>
+    
+    <!-- Mouse ears -->
+    <circle cx="33" cy="12" r="4" fill="#A0A0A0"/>
+    <circle cx="25" cy="12" r="4" fill="#A0A0A0"/>
+    
+    <!-- Mouse eyes -->
+    <circle cx="33" cy="18" r="1.5" fill="#000000"/>
+    <circle cx="27" cy="18" r="1.5" fill="#000000"/>
+    
+    <!-- Mouse nose -->
+    <ellipse cx="37" cy="20" rx="2" ry="1.5" fill="#FFA0A0"/>
+    
+    <!-- Mouse tail -->
+    <path d="M5 22 C-5 30, 15 30, 5 15" stroke="#A0A0A0" stroke-width="2" fill="none"/>
+</svg> 

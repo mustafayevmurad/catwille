@@ -1,0 +1,2178 @@
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Главный контейнер игры */
+.game-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    position: relative;
+}
+
+/* Верхняя панель */
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+    background-color: #e9bc75; /* Светло-коричневый цвет дерева */
+    background-image: 
+        linear-gradient(90deg, rgba(173, 117, 40, 0.1) 0%, rgba(248, 200, 129, 0.1) 25%, rgba(173, 117, 40, 0.1) 50%, rgba(248, 200, 129, 0.1) 75%, rgba(173, 117, 40, 0.1) 100%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23a78445" stroke-width="0.5" stroke-opacity="0.1"/><rect x="25" y="25" width="50" height="50" fill="none" stroke="%23a78445" stroke-width="0.3" stroke-opacity="0.05"/></svg>');
+    color: #5a3921; /* Темно-коричневый цвет для текста */
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    margin: 6px;
+    border: 1px solid #c3964d;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    height: auto;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: calc(100% - 12px); /* Adjust for margins */
+}
+
+/* Эффект деревянной текстуры для панели */
+.top-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(0deg, 
+            rgba(139, 94, 30, 0.05) 0px, 
+            rgba(139, 94, 30, 0.05) 1px, 
+            transparent 1px, 
+            transparent 2px);
+    border-radius: 25px;
+    pointer-events: none;
+}
+
+.resources-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.left-resources, .right-resources {
+    display: flex;
+    gap: 15px;
+}
+
+.player-name {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    color: #5a3921;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+    padding: 0 15px;
+}
+
+.resource {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.resource-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resource-icon {
+    font-size: 18px;
+    color: #5a3921;
+}
+
+.resource-amount {
+    color: #5a3921;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.wood-icon {
+    color: #8B4513; /* SaddleBrown shade for wood */
+}
+
+.fish-icon {
+    color: #4682B4; /* SteelBlue shade for fish */
+}
+
+.fa-star {
+    color: #FFD700 !important; /* Gold color for stars */
+}
+
+.fa-coins {
+    color: #FFD700; /* Gold color for coins */
+}
+
+.player-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #5a3921;
+}
+
+.player-stars i {
+    color: #FFD700 !important;
+    font-size: 22px;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+.coins-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    justify-content: flex-end;
+    width: 33%;
+}
+
+.coins-icon {
+    color: #FFD700; /* Gold color for coins */
+    font-size: 22px;
+}
+
+.player-coins {
+    font-weight: bold;
+    color: #5a3921;
+    font-size: 22px;
+}
+
+/* Полоса энергии */
+.energy-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* Add background so text is visible */
+    position: fixed !important;
+    top: 53px; /* Positioned exactly at the bottom edge of the top bar */
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.energy-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 90px;
+}
+
+.energy-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.energy-bar-container {
+    flex: 1;
+    height: 14px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.energy-bar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #4CAF50, #8BC34A);
+    border-radius: 8px;
+    transition: width 0.4s ease-out, background 0.3s ease;
+    box-shadow: 0 0 5px rgba(93, 217, 104, 0.5);
+    position: relative;
+    animation: energyPulse 2s infinite;
+}
+
+@keyframes energyPulse {
+    0% {
+        box-shadow: 0 0 5px rgba(93, 217, 104, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 8px rgba(93, 217, 104, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(93, 217, 104, 0.5);
+    }
+}
+
+.energy-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(0, 0, 0, 0.05) 51%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    border-radius: 8px;
+}
+
+.energy-timer {
+    font-size: 12px;
+    color: #333;
+    margin-left: 10px;
+    font-weight: bold;
+    min-width: 90px;
+    text-align: center;
+    padding: 2px 5px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Игровая область */
+.game-area {
+    flex: 1;
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    background-image: url(../images/backgrounds/main_background.webp);
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    padding-top: 80px; /* Уменьшенный отступ сверху */
+    padding-bottom: 20px; /* Уменьшенный отступ снизу */
+    height: 100vh; /* Уменьшенная высота */
+    box-sizing: border-box;
+}
+
+/* Контейнер для зданий, сохраняющий пропорции с фоном */
+.buildings-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    min-height: 90%; /* Уменьшенная минимальная высота */
+    padding-bottom: 20px; /* Уменьшенный отступ снизу */
+}
+
+/* Ряды зданий */
+.buildings-row {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Позиционирование рядов зданий */
+.buildings-row:nth-child(1) {
+    top: 10%; /* Первый ряд (домик) */
+}
+
+.buildings-row:nth-child(2) {
+    top: 30%; /* Второй ряд (склад и мурчальня) */
+}
+
+.buildings-row:nth-child(3) {
+    top: 50%; /* Третий ряд (ферма и лесопилка) */
+}
+
+.buildings-row:nth-child(4) {
+    top: 70%; /* Четвертый ряд (повозка) */
+}
+
+/* Обертка для здания */
+.building-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+}
+
+/* Здания */
+.building {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.building:hover {
+    transform: translateY(-3px);
+}
+
+.building:active {
+    transform: translateY(0px);
+}
+
+.building-name {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+}
+
+/* Кнопка улучшения */
+.upgrade-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.upgrade-btn:hover {
+    background-color: #45a049;
+}
+
+.upgrade-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Стили для конкретных зданий */
+.main-house {
+    background-image: url(../images/buildings/house.webp);
+}
+
+.main-house.level-0 {
+    background-image: url(../images/buildings/house_0.webp);
+}
+
+.warehouse {
+    background-image: url(../images/buildings/warehouse.webp);
+}
+
+.warehouse.level-0 {
+    background-image: url(../images/buildings/warehouse_0.webp);
+}
+
+.cathouse {
+    background-image: url(../images/buildings/cathouse.webp);
+}
+
+.cathouse.level-0 {
+    background-image: url(../images/buildings/cathouse_0.webp);
+}
+
+.cart {
+    background-image: url(../images/buildings/cart.webp);
+}
+
+.cart.level-0 {
+    background-image: url(../images/buildings/cart_0.webp);
+}
+
+.farm {
+    background-image: url(../images/buildings/farm.webp);
+}
+
+.farm.level-0 {
+    background-image: url(../images/buildings/farm_0.webp);
+}
+
+.sawmill {
+    background-image: url(../images/buildings/sawmill.webp);
+}
+
+.sawmill.level-0 {
+    background-image: url(../images/buildings/sawmill_0.webp);
+}
+
+/* Уровни зданий */
+.level-0 {
+    /* Убираем фильтр grayscale, так как будем использовать разные изображения */
+}
+
+.level-1 {
+    filter: brightness(1);
+}
+
+.level-2 {
+    filter: brightness(1.1) saturate(1.2);
+}
+
+.level-3 {
+    filter: brightness(1.2) saturate(1.4);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Нижнее меню */
+.bottom-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: #b19062; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100"><rect width="100%" height="100%" fill="%23b19062"/><path d="M0,0 L200,100 M40,0 L240,100 M-40,0 L160,100" stroke="%23c9b28f" stroke-width="1" stroke-opacity="0.3"/></svg>'), linear-gradient(to bottom, rgba(177, 144, 98, 0.95), rgba(148, 116, 72, 1));
+    padding: 8px 0 15px 0;
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    z-index: 1000;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.15);
+    border: 4px solid rgba(201, 178, 143, 0.7);
+    border-bottom: none;
+}
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1e4c7;
+    background-image: radial-gradient(circle at center, #f9f2df 0%, #f1e4c7 80%);
+    padding: 5px 0;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.1);
+    border: 2px solid #e0d2b1;
+    transition: all 0.2s ease;
+    height: 45px; /* Standardized height */
+    box-sizing: border-box; /* Ensure padding and border are included in dimensions */
+}
+
+.menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.15);
+    background-image: radial-gradient(circle at center, #fcf8eb 0%, #f6edd8 80%);
+}
+
+#cats-btn {
+    grid-column: 1;
+    margin-left: 15px;
+    margin-right: auto;
+    width: 80px;
+    height: 45px; /* Explicit height */
+}
+
+#tasks-btn {
+    grid-column: 3;
+    margin-right: 15px;
+    margin-left: auto;
+    width: 80px;
+    height: 45px; /* Explicit height */
+}
+
+#map-btn {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    z-index: 20;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: #f1e4c7;
+    background-image: radial-gradient(circle at center, #f9f2df 0%, #f1e4c7 80%);
+    border: 2px solid #e0d2b1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#map-btn:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    background-image: radial-gradient(circle at center, #fcf8eb 0%, #f6edd8 80%);
+}
+
+#map-btn i {
+    font-size: 26px;
+    margin-bottom: 2px;
+    color: #74582c;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+#map-btn span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #74582c;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+.menu-btn i {
+    font-size: 20px;
+    margin-bottom: 3px;
+    color: #74582c;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+.menu-btn span {
+    font-size: 12px;
+    color: #74582c;
+    font-weight: 500;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+}
+
+/* Активные состояния */
+.menu-btn:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+}
+
+/* Модальные окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #f8f8f8;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.8em;
+}
+
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #555;
+}
+
+.modal-body {
+    padding: 10px 0;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+    transition: 0.3s;
+}
+
+.tab-btn:hover {
+    background-color: #ddd;
+}
+
+.tab-btn.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.tab-content {
+    padding: 10px;
+}
+
+/* Leaderboard */
+.leaderboard-section {
+    margin-bottom: 20px;
+}
+
+.leaderboard-section h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.leaderboard-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.leaderboard-table td.no-data {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Кнопки */
+.btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.btn:active {
+    background-color: #3d8b40;
+}
+
+/* Загрузочный экран */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.loading-container {
+    text-align: center;
+}
+
+.loading-cat {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+.loading-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.loading-bar-container {
+    width: 200px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0;
+    background-color: #4CAF50;
+    transition: width 0.3s;
+}
+
+/* Ресурсы */
+.resource-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.resource-icon.small {
+    width: 16px;
+    height: 16px;
+}
+
+.cat-food-icon {
+    background-image: url('../images/resources/cat_food.png');
+}
+
+/* Уровень */
+.level-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.level-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/level_icon.png');
+    background-size: contain;
+    margin-right: 5px;
+}
+
+.level-info {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.experience-bar-container {
+    flex: 1;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.experience-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #3498db;
+    transition: width 0.3s;
+}
+
+/* Панель с кошками */
+.cats-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(51, 51, 51, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cats-header {
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+    position: relative;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cats-header h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cats-total-stars {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 18px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Стили для списка кошек */
+.cats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    max-height: calc(80vh - 100px);
+    overflow-y: auto;
+}
+
+.cat-list-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cat-list-item:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.cat-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cat-list-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cat-list-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.cat-list-rarity-stars {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Модальное окно с карточкой */
+.cat-card-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.modal-close-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Цвета для разных редкостей */
+.cat-list-item.legendary {
+    border-left: 3px solid #FFD700;
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.cat-list-item.epic {
+    border-left: 3px solid #9932CC;
+    background: linear-gradient(90deg, rgba(153, 50, 204, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.cat-list-item.rare {
+    border-left: 3px solid #4169E1;
+    background: linear-gradient(90deg, rgba(65, 105, 225, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.cat-list-item.uncommon {
+    border-left: 3px solid #32CD32;
+    background: linear-gradient(90deg, rgba(50, 205, 50, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.cat-list-item.common {
+    border-left: 3px solid #A9A9A9;
+    background: linear-gradient(90deg, rgba(169, 169, 169, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+/* Стили для скроллбара в списке кошек */
+.cats-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cats-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.cats-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.cats-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Сообщение об отсутствии кошек */
+.no-cats-message {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Стили для бейсбольных карточек в модальном окне */
+.cat-card-baseball {
+    width: 280px;
+    height: 400px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transform-origin: center;
+    animation: cardAppear 0.3s ease-out;
+}
+
+@keyframes cardAppear {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.card-top {
+    height: 60%;
+    position: relative;
+    background: #f8f8f8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.cat-image-baseball {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease;
+}
+
+.cat-card-baseball:hover .cat-image-baseball {
+    transform: scale(1.05);
+}
+
+.card-bottom {
+    height: 40%;
+    padding: 15px;
+    position: relative;
+    background: white;
+}
+
+.cat-name-baseball {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.cat-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.cat-stars-baseball {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Медиа-запросы для экранов разного размера */
+@media screen and (max-width: 480px) {
+    /* For small screens */
+    .resource-bar {
+        padding: 5px;
+    }
+    
+    .resource-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .resource-amount {
+        font-size: 12px;
+    }
+    
+    .level-bar {
+        padding: 3px 8px;
+    }
+    
+    .level-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .level-info {
+        font-size: 12px;
+    }
+    
+    /* Модальное окно с котами */
+    .cats-panel {
+        width: 95%;
+        max-height: 90vh;
+        padding: 15px;
+    }
+    
+    .cat-card {
+        padding: 10px;
+    }
+    
+    .cat-image {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .cat-name {
+        font-size: 14px;
+    }
+    
+    .cat-bonus {
+        font-size: 12px;
+    }
+    
+    .cat-activate-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    /* Кнопки меню */
+    .menu-btn {
+        height: 40px; /* Smaller but consistent height for small screens */
+    }
+    
+    .menu-btn i {
+        font-size: 18px;
+    }
+    
+    .menu-btn span {
+        font-size: 10px;
+    }
+    
+    #cats-btn, #tasks-btn {
+        width: 70px; /* Slightly smaller but equal width */
+        height: 40px;
+    }
+    
+    /* Модальное окно */
+    .modal-content {
+        padding: 15px;
+    }
+    
+    /* Масштабирование элементов на маленьких экранах */
+    .building {
+        transform: scale(1.10);
+    }
+    
+    .resource-source {
+        transform: scale(0.8);
+    }
+    
+    /* Фон для game-area */
+    .game-area {
+        background-position: center top;
+        background-size: contain;
+    }
+    
+    /* Позиционирование рядов зданий на маленьких экранах */
+    .buildings-row:nth-child(1) {
+        top: 5%;
+    }
+    
+    .buildings-row:nth-child(2) {
+        top: 25%;
+    }
+    
+    .buildings-row:nth-child(3) {
+        top: 45%;
+    }
+    
+    .buildings-row:nth-child(4) {
+        top: 65%;
+    }
+    
+    /* Контейнер зданий */
+    .buildings-container {
+        min-height: 100vh;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    /* Для планшетов и средних смартфонов */
+    .game-area {
+        background-position: center top;
+    }
+    
+    /* Позиционирование рядов зданий на средних экранах */
+    .buildings-row:nth-child(1) {
+        top: 8%;
+    }
+    
+    .buildings-row:nth-child(2) {
+        top: 28%;
+    }
+    
+    .buildings-row:nth-child(3) {
+        top: 48%;
+    }
+    
+    .buildings-row:nth-child(4) {
+        top: 68%;
+    }
+    
+    .buildings-container {
+        min-height: 120vh;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    /* Для больших экранов */
+    .game-area {
+        background-position: center top;
+        background-size: cover;
+    }
+    
+    /* Позиционирование рядов зданий на больших экранах */
+    .buildings-row:nth-child(1) {
+        top: 10%;
+    }
+    
+    .buildings-row:nth-child(2) {
+        top: 30%;
+    }
+    
+    .buildings-row:nth-child(3) {
+        top: 50%;
+    }
+    
+    .buildings-row:nth-child(4) {
+        top: 70%;
+    }
+    
+    .buildings-container {
+        min-height: 110vh;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    /* Для горизонтальной ориентации */
+    .game-area {
+        background-size: cover;
+    }
+}
+
+/* Дополнительные стили, не дублирующие предыдущие */
+.empty-btn {
+    background-color: transparent;
+    cursor: default;
+}
+
+/* Модальное окно дома */
+.house-modal {
+    max-width: 400px;
+}
+
+.house-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+}
+
+.storage-info {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.storage-info h4 {
+    margin: 0 0 10px 0;
+    color: #4CAF50;
+    font-size: 16px;
+}
+
+.storage-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.storage-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.next-level-info {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+}
+
+.next-level-info h5 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 14px;
+}
+
+.max-level-info {
+    margin-top: 15px;
+    padding: 8px;
+    background: #E8F5E9;
+    border-radius: 4px;
+    color: #2E7D32;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Hide map containers by default */
+.city-map-container,
+.region-map-container {
+    display: none;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.empty-category-message {
+    text-align: center;
+    color: #aaa;
+    padding: 15px;
+    font-style: italic;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    margin: 5px 0;
+}
+
+/* Hall of Fame - Зал славы */
+.hall-of-fame-modal {
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.leaderboards-container {
+    padding: 10px 0;
+}
+
+.leaderboard-tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.leaderboard-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.leaderboard-tab:hover {
+    color: #333;
+}
+
+.leaderboard-tab.active {
+    color: #3498db;
+    border-bottom-color: #3498db;
+}
+
+.leaderboard-content {
+    display: none;
+    padding: 15px;
+}
+
+.leaderboard-content.active {
+    display: block;
+}
+
+.leaderboard-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.leaderboard-header h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.leaderboard-header p {
+    font-size: 14px;
+    color: #666;
+}
+
+.leaderboard-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.leaderboard-rank {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.leaderboard-rank.top-1 {
+    background-color: gold;
+    color: #333;
+}
+
+.leaderboard-rank.top-2 {
+    background-color: silver;
+    color: #333;
+}
+
+.leaderboard-rank.top-3 {
+    background-color: #cd7f32; /* bronze */
+    color: white;
+}
+
+.leaderboard-player-info {
+    flex: 1;
+}
+
+.leaderboard-player-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.leaderboard-player-score {
+    color: #777;
+    font-size: 12px;
+}
+
+.leaderboard-value {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.leaderboard-tabs {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border-radius: 5px 5px 0 0;
+    margin-right: 5px;
+}
+
+.leaderboard-tab.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.leaderboard-placeholder {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
+}
+
+.map-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: 1500;
+    overflow-y: auto;
+    padding-bottom: 70px;
+    background-color: #e8f5e9;
+    background-image: url(../images/backgrounds/main_background2.webp);
+    background-size: 100% 100%;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.map-content-wrapper {
+    padding-top: 100px;
+    padding: 100px 15px 70px 15px;
+    box-sizing: border-box;
+    min-height: 120%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Стили для buildings-container-map */
+.buildings-container-map {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Стили для buildings-row-map */
+.buildings-row-map {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Стили для resource-zone */
+.resource-zone {
+    width: 48%;
+    height: 120px;
+    background-color: rgba(224, 224, 224, 0.7);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.resource-zone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для city-building */
+.city-building {
+    width: 48%;
+    height: 120px;
+    background-color: rgba(224, 224, 224, 0.7);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.city-building:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Метки для зданий и зон */
+.resource-zone label, .city-building label {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 10px;
+    font-size: 14px;
+}
+
+/* Стили для списка кошек */
+.cats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.cat-list-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.cat-list-item:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.cat-thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.cat-list-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cat-list-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #fff;
+}
+
+.cat-list-rarity-stars {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Стили для модального окна с карточкой */
+.cat-card-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.modal-close-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Цвета для разных редкостей в списке */
+.cat-list-item.legendary {
+    border-left: 4px solid #FFD700;
+}
+
+.cat-list-item.epic {
+    border-left: 4px solid #9932CC;
+}
+
+.cat-list-item.rare {
+    border-left: 4px solid #4169E1;
+}
+
+.cat-list-item.uncommon {
+    border-left: 4px solid #32CD32;
+}
+
+.cat-list-item.common {
+    border-left: 4px solid #A9A9A9;
+}
+
+/* Forest Mini-Game Styles */
+.forest-minigame-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.forest-minigame {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #e9bc75;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    border: 4px solid #c3964d;
+    position: relative;
+}
+
+.forest-resources {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f0d294;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 15px 15px 10px 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(173, 117, 40, 0.3);
+    font-weight: bold;
+    color: #5a3921;
+    font-size: 24px;
+}
+
+.forest-resource {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.forest-resource i {
+    font-size: 24px;
+}
+
+.tree-health-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0 15px 15px 15px;
+    background-color: #f0d294;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(173, 117, 40, 0.3);
+}
+
+.tree-health-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5a3921;
+}
+
+.tree-health-bar {
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.tree-health-progress {
+    height: 100%;
+    background-color: #68b550;
+    width: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.forest-game-area {
+    position: relative;
+    flex: 1;
+    min-height: 400px;
+    background-color: #bbdfc8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px 15px 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 1;
+}
+
+.forest-tree {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../images/forest/tree.webp');
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.forest-tree:hover {
+    transform: scale(1.02);
+}
+
+.forest-tree:active {
+    transform: scale(0.98);
+}
+
+.forest-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/forest/forest_bg.webp');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.forest-close-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.forest-close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.forest-animation {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    animation: forestResourceCollected 1s forwards;
+    pointer-events: none;
+}
+
+@keyframes forestResourceCollected {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -100%) scale(1.5);
+    }
+    100% {
+        transform: translate(-50%, -150%) scale(1);
+        opacity: 0;
+    }
+}
+
+.forest-tree-shake {
+    animation: treeShake 0.5s ease;
+}
+
+@keyframes treeShake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Медиа-запросы для адаптивности */
+@media screen and (max-width: 480px) {
+    .forest-minigame {
+        width: 95%;
+    }
+    
+    .forest-resources {
+        font-size: 18px;
+        padding: 10px;
+    }
+    
+    .forest-resource i {
+        font-size: 18px;
+    }
+    
+    .tree-health-label {
+        font-size: 18px;
+    }
+    
+    .forest-count {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+    
+    .forest-game-area {
+        min-height: 250px;
+    }
+}
+
+/* Forest Mini-Game Fishing Mini-Game Styles */
+.fishing-minigame-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.fishing-minigame {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #e9bc75;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    border: 4px solid #c3964d;
+    position: relative;
+}
+
+.fishing-resources {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f0d294;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 15px 15px 10px 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(173, 117, 40, 0.3);
+    font-weight: bold;
+    color: #5a3921;
+    font-size: 24px;
+}
+
+.fishing-resource {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fishing-resource i {
+    font-size: 24px;
+}
+
+.pond-health-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0 15px 15px 15px;
+    background-color: #f0d294;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(173, 117, 40, 0.3);
+}
+
+.pond-health-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5a3921;
+}
+
+.pond-health-bar {
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.pond-health-progress {
+    height: 100%;
+    background-color: #4a90e2;
+    width: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.fishing-game-area {
+    position: relative;
+    flex: 1;
+    min-height: 300px;
+    background-color: #c4e5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px 15px 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 1;
+}
+
+.fishing-pond {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../images/fishing/pond.webp');
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.fishing-count {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #b38d56;
+    color: white;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fishing-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/fishing/fishing_bg.webp');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.fishing-close-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.fishing-close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.fishing-animation {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4a90e2;
+    animation: fishingResourceCollected 1s forwards;
+    pointer-events: none;
+}
+
+@keyframes fishingResourceCollected {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -100%) scale(1.5);
+    }
+    100% {
+        transform: translate(-50%, -150%) scale(1);
+        opacity: 0;
+    }
+}
+
+.fishing-ripple {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    animation: ripple 1s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .fishing-minigame {
+        width: 95%;
+    }
+    
+    .fishing-resources {
+        font-size: 18px;
+        padding: 10px;
+    }
+    
+    .fishing-resource i {
+        font-size: 18px;
+    }
+    
+    .pond-health-label {
+        font-size: 18px;
+    }
+    
+    .fishing-count {
+        font-size: 16px;
+        padding: 6px 12px;
+    }
+    
+    .fishing-game-area {
+        min-height: 250px;
+    }
+}

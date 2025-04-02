@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Фон -->
+    <circle cx="100" cy="100" r="90" fill="#DDA0DD"/>
+    
+    <!-- Тело кота -->
+    <path d="M60,100 C60,60 140,60 140,100 C140,140 60,140 60,100" fill="#4B0082"/>
+    
+    <!-- Голова -->
+    <circle cx="100" cy="80" r="30" fill="#4B0082"/>
+    
+    <!-- Уши -->
+    <path d="M80,60 L90,40 L100,60" fill="#4B0082"/>
+    <path d="M120,60 L110,40 L100,60" fill="#4B0082"/>
+    
+    <!-- Глаза -->
+    <circle cx="90" cy="75" r="5" fill="gold"/>
+    <circle cx="110" cy="75" r="5" fill="gold"/>
+    
+    <!-- Нос -->
+    <path d="M98,85 L100,90 L102,85" fill="pink"/>
+    
+    <!-- Жилетка -->
+    <path d="M70,90 L130,90 L120,70 L80,70 Z" fill="#FFD700"/>
+    
+    <!-- Монета -->
+    <circle cx="140" cy="80" r="10" fill="#FFD700"/>
+    <text x="135" y="85" font-size="8" fill="#4B0082">$</text>
+    
+    <!-- Лапы -->
+    <circle cx="70" cy="130" r="15" fill="#4B0082"/>
+    <circle cx="130" cy="130" r="15" fill="#4B0082"/>
+</svg> 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Фон -->
+    <circle cx="100" cy="100" r="90" fill="#2F4F4F"/>
+    
+    <!-- Тело кота -->
+    <path d="M60,100 C60,60 140,60 140,100 C140,140 60,140 60,100" fill="#000000"/>
+    
+    <!-- Голова -->
+    <circle cx="100" cy="80" r="30" fill="#000000"/>
+    
+    <!-- Уши -->
+    <path d="M80,60 L90,40 L100,60" fill="#000000"/>
+    <path d="M120,60 L110,40 L100,60" fill="#000000"/>
+    
+    <!-- Глаза -->
+    <circle cx="90" cy="75" r="5" fill="#FFD700"/>
+    <circle cx="110" cy="75" r="5" fill="#FFD700"/>
+    
+    <!-- Нос -->
+    <path d="M98,85 L100,90 L102,85" fill="pink"/>
+    
+    <!-- Корона -->
+    <path d="M70,50 L100,30 L130,50 L120,80 L80,80 Z" fill="#FFD700"/>
+    <circle cx="100" cy="30" r="5" fill="#FFD700"/>
+    <circle cx="80" cy="50" r="3" fill="#FFD700"/>
+    <circle cx="120" cy="50" r="3" fill="#FFD700"/>
+    
+    <!-- Тень -->
+    <path d="M40,120 C40,80 160,80 160,120" fill="#000000" opacity="0.3"/>
+    
+    <!-- Лапы -->
+    <circle cx="70" cy="130" r="15" fill="#000000"/>
+    <circle cx="130" cy="130" r="15" fill="#000000"/>
+</svg> 

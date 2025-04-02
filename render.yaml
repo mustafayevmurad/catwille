@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: catwille
+    env: static
+    buildCommand: npm ci
+    staticPublishPath: ./client
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        value: 8155315338:AAF0_aI62-LM4bRalu5dJOn_Q3Mb6tFkZ3o
+      - key: MONGODB_URI
+        value: mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.mongodb.net/catwille?retryWrites=true&w=majority
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html 

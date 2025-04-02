@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Фон -->
+    <circle cx="100" cy="100" r="90" fill="#E6E6FA"/>
+    
+    <!-- Тело кота -->
+    <path d="M60,100 C60,60 140,60 140,100 C140,140 60,140 60,100" fill="#808080"/>
+    
+    <!-- Голова -->
+    <circle cx="100" cy="80" r="30" fill="#808080"/>
+    
+    <!-- Уши -->
+    <path d="M80,60 L90,40 L100,60" fill="#808080"/>
+    <path d="M120,60 L110,40 L100,60" fill="#808080"/>
+    
+    <!-- Глаза -->
+    <circle cx="90" cy="75" r="5" fill="#F0F8FF"/>
+    <circle cx="110" cy="75" r="5" fill="#F0F8FF"/>
+    <circle cx="90" cy="75" r="2" fill="black"/>
+    <circle cx="110" cy="75" r="2" fill="black"/>
+    
+    <!-- Нос -->
+    <path d="M98,85 L100,90 L102,85" fill="pink"/>
+    
+    <!-- Очки -->
+    <path d="M85,70 L95,70" stroke="black" stroke-width="2"/>
+    <path d="M105,70 L115,70" stroke="black" stroke-width="2"/>
+    <circle cx="95" cy="70" r="5" stroke="black" fill="none"/>
+    <circle cx="105" cy="70" r="5" stroke="black" fill="none"/>
+    
+    <!-- Записная книжка -->
+    <rect x="130" y="70" width="20" height="25" fill="#F5F5F5" stroke="black"/>
+    <line x1="130" y1="80" x2="150" y2="80" stroke="black"/>
+    
+    <!-- Лапы -->
+    <circle cx="70" cy="130" r="15" fill="#808080"/>
+    <circle cx="130" cy="130" r="15" fill="#808080"/>
+</svg> 

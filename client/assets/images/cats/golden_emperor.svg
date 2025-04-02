@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Фон -->
+    <circle cx="100" cy="100" r="90" fill="#FFD700"/>
+    
+    <!-- Тело кота -->
+    <path d="M60,100 C60,60 140,60 140,100 C140,140 60,140 60,100" fill="#DAA520"/>
+    
+    <!-- Голова -->
+    <circle cx="100" cy="80" r="30" fill="#DAA520"/>
+    
+    <!-- Уши -->
+    <path d="M80,60 L90,40 L100,60" fill="#DAA520"/>
+    <path d="M120,60 L110,40 L100,60" fill="#DAA520"/>
+    
+    <!-- Глаза -->
+    <circle cx="90" cy="75" r="5" fill="#FFD700"/>
+    <circle cx="110" cy="75" r="5" fill="#FFD700"/>
+    <circle cx="90" cy="75" r="2" fill="#000000"/>
+    <circle cx="110" cy="75" r="2" fill="#000000"/>
+    
+    <!-- Нос -->
+    <path d="M98,85 L100,90 L102,85" fill="pink"/>
+    
+    <!-- Императорская корона -->
+    <path d="M60,40 L100,20 L140,40 L130,70 L70,70 Z" fill="#FFD700"/>
+    <circle cx="100" cy="20" r="8" fill="#FFD700"/>
+    <circle cx="80" cy="40" r="5" fill="#FFD700"/>
+    <circle cx="120" cy="40" r="5" fill="#FFD700"/>
+    
+    <!-- Драгоценные камни -->
+    <circle cx="100" cy="20" r="3" fill="#FF69B4"/>
+    <circle cx="80" cy="40" r="2" fill="#4169E1"/>
+    <circle cx="120" cy="40" r="2" fill="#4169E1"/>
+    
+    <!-- Мантия -->
+    <path d="M40,100 C40,60 160,60 160,100" fill="#DAA520" opacity="0.5"/>
+    
+    <!-- Лапы -->
+    <circle cx="70" cy="130" r="15" fill="#DAA520"/>
+    <circle cx="130" cy="130" r="15" fill="#DAA520"/>
+</svg> 
