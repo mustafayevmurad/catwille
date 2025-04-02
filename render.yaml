@@ -1,15 +1,39 @@
 services:
-  - type: web
-    name: catwille
+  # Статический сайт для клиентской части
+  - type: static
+    name: catwille-client
     env: static
-    buildCommand: npm ci
+    buildCommand: cd client && npm install
     staticPublishPath: ./client
-    envVars:
-      - key: TELEGRAM_BOT_TOKEN
-        value: 8155315338:AAF0_aI62-LM4bRalu5dJOn_Q3Mb6tFkZ3o
-      - key: MONGODB_URI
-        value: mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.mongodb.net/catwille?retryWrites=true&w=majority
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
     routes:
       - type: rewrite
         source: /*
-        destination: /index.html 
+        destination: /index.html
+    envVars:
+      - key: WEBAPP_URL
+        value: https://catwille-server.onrender.com
+
+  # Web Service для серверной части (бот и API)
+  - type: web
+    name: catwille-server
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: node server/server.js
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        value: 8155315338:AAF0_aI62-LM4bRalu5dJOn_Q3Mb6tFkZ3o
+      - key: MONGODB_USERNAME
+        value: admin
+      - key: MONGODB_PASSWORD
+        value: 6BdyAY9skeH8wSzB
+      - key: MONGODB_URI
+        value: mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.mongodb.net/catwille?retryWrites=true&w=majority
+      - key: CLIENT_URL
+        value: https://catwille-client.onrender.com
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true 
