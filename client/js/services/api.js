@@ -3,9 +3,11 @@
  */
 class ApiService {
     constructor() {
-        this.baseUrl = 'http://localhost:3000/api';
-        this.isDemo = true; // Флаг демо-режима
-        console.log('ApiService initialized in demo mode:', this.isDemo);
+        this.baseUrl = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000/api' 
+            : 'https://catwille-server.onrender.com/api';
+        this.isDemo = false; // Отключаем демо-режим для реального взаимодействия с API
+        console.log('ApiService initialized with URL:', this.baseUrl);
     }
 
     /**
